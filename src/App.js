@@ -100,7 +100,7 @@ function App() {
                                 dataKey="данные1"
                                 stroke="#3377bb"
                                 fillOpacity={1}
-                                fill="url(#colorUv)"
+                                fill="transparent"
                                 dot={{
                                     stroke: '#3377bb',
                                     strokeWidth: 2,
@@ -119,7 +119,7 @@ function App() {
                                 dataKey="данные2"
                                 stroke="tomato"
                                 fillOpacity={1}
-                                fill="url(#colorUv)"
+                                fill="transparent"
                                 dot={{
                                     stroke: 'red',
                                     strokeWidth: 2,

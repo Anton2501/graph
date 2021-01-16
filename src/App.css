@@ -46,6 +46,12 @@
   margin: 0 auto;
   overflow-x: scroll;
 }
+@media (min-width: 1160px) {
+  .wrap {
+    width: 900px;
+    overflow: hidden;
+  }
+}
 
 .views-statistics {
   position: relative;

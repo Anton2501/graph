@@ -72,21 +72,27 @@ function App() {
         </text>
     );
 
+    const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    const windowWidth = isSafari() ? document.documentElement.clientWidth : window.innerWidth;
+
+    const isMobile = windowWidth < 1160;
+
     return (
         <div className="App">
             <div className="wrap">
                 <div className="views-statistics">
-                    <ResponsiveContainer width={900} height={200} id="123">
+                    <ResponsiveContainer width={isMobile ? 900 : '100%'} height={200} id="123">
                         <AreaChart width={674} height={200} data={graphData} margin={{ left: 20, top: 10, right: 20 }}>
                             {/* <defs>
                                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="5%" stopColor="#cfe1f5" stopOpacity={1} />
                                     <stop offset="95%" stopColor="#cfe1f5" stopOpacity={0.1} />
                                 </linearGradient>
-                            </defs>
-                            <defs>
-                                <rect x="10" y="10" width="100" height="100" fill="red" />
                             </defs> */}
+                            <defs>
+                                <rect x="10" y="10" width="100" height="100" fill="#fff" />
+                            </defs>
                             <XAxis dataKey="дата" tick={renderCustomAxisTick} tickLine={false} axisLine={false} />
                             <Tooltip />
                             <Area

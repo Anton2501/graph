@@ -42,6 +42,7 @@
 }
 
 .wrap {
+  display: flex;
   width: 100%;
   margin: 0 auto;
   padding: 30px 0;
@@ -49,6 +50,7 @@
 }
 @media (min-width: 1160px) {
   .wrap {
+    display: block;
     width: 900px;
     overflow: hidden;
   }
@@ -66,4 +68,8 @@
   /* background-image: linear-gradient(to bottom, rgba(51, 119, 187, 0), rgba(51, 119, 187, 0.5) 52%, #3377bb); */
   width: 674px;
   height: 200px;
+}
+.plug {
+  width: 45vw;
+  flex-shrink: 0;
 }

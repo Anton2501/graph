@@ -162,6 +162,7 @@ function App() {
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
+                {isMobile && <div className="plug" />}
             </div>
         </div>
     );

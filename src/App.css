@@ -42,8 +42,9 @@
 }
 
 .wrap {
-  width: 600px;
+  width: 100%;
   margin: 0 auto;
+  padding: 30px 0;
   overflow-x: scroll;
 }
 @media (min-width: 1160px) {
@@ -57,7 +58,6 @@
   position: relative;
   margin: 0 auto;
   max-width: 900px;
-  height: 264px;
 }
 
 .views-statistics__graph {

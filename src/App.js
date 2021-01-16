@@ -1,74 +1,98 @@
 import React from 'react';
-import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import {XAxis, Tooltip, ResponsiveContainer, LabelList, LineChart, Line } from 'recharts';
 import './App.css';
 
 const graphData = [
     {
         дата: 'JAN',
-        данные1 : 97,
-        данные2: 15,
+        данные1 : 9700,
+        данные2: 1500,
     },
     {
         дата: 'FEB',
-        данные1: 83,
-        данные2: 16,
+        данные1: 8300,
+        данные2: 1600,
     },
     {
         дата: 'MAR',
-        данные1: 15,
-        данные2: 40,
+        данные1: 1500,
+        данные2: 4000,
     },
     {
-        дата: 'APRL',
-        данные1: 32,
-        данные2: 9,
+        дата: 'APR',
+        данные1: 3200,
+        данные2: 900,
     },
     {
         дата: 'MAY',
-        данные1: 4,
-        данные2: 23,
+        данные1: 400,
+        данные2: 2300,
     },
     {
         дата: 'JUN',
-        данные1: 42,
-        данные2: 35,
+        данные1: 4200,
+        данные2: 3500,
     },
     {
         дата: 'JUL',
-        данные1: 30,
-        данные2: 105,
+        данные1: 3000,
+        данные2: 10000,
     },
     {
         дата: 'AUG',
-        данные1: -40,
-        данные2: 90,
+        данные1: -2000,
+        данные2: 9000,
     },
     {
         дата: 'SEP',
-        данные1: 30,
-        данные2: 72,
+        данные1: 2100,
+        данные2: 7200,
     },
     {
         дата: 'NOV',
-        данные1: 30,
-        данные2: 12,
+        данные1: 3800,
+        данные2: 1200,
     },
     {
         дата: 'DEC',
-        данные1: 30,
-        данные2: 47,
+        данные1: 3000,
+        данные2: 4700,
     },
 ];
 
 function App() {
-    const renderCustomAxisTick = ({ x, y, payload }) => (
+    const renderCustomAxisTick = ({ x, y, payload }) => {
+        return (
+            <text
+                x={x}
+                y={y + 20}
+                style={{ fontSize: '12px', fill: '#909090' }}
+                textAnchor="middle"
+            >
+                {payload.value}
+            </text>
+        )
+    };
+
+    const renderRedAreaData = ({ x, y, value }) => (
         <text
             x={x}
-            y={y + 20}
-            style={{ fontSize: '12px', fill: '#909090' }}
+            y={y - 10}
+            style={{ fontSize: '14px', fill: 'red', fontWeight: 'bold' }}
             textAnchor="middle"
         >
-            {payload.value}
+            {value}
+        </text>
+    );
+
+    const renderGreenAreaData = ({ x, y, value }) => (
+        <text
+            x={x}
+            y={y - 10}
+            style={{ fontSize: '14px', fill: 'rgb(113, 204, 81)', fontWeight: 'bold' }}
+            textAnchor="middle"
+        >
+            {value}
         </text>
     );
 
@@ -82,27 +106,23 @@ function App() {
         <div className="App">
             <div className="wrap">
                 <div className="views-statistics">
-                    <ResponsiveContainer width={isMobile ? 900 : '100%'} height={200} id="123">
-                        <AreaChart width={674} height={200} data={graphData} margin={{ left: 20, top: 10, right: 20 }}>
-                            {/* <defs>
-                                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#cfe1f5" stopOpacity={1} />
-                                    <stop offset="95%" stopColor="#cfe1f5" stopOpacity={0.1} />
-                                </linearGradient>
-                            </defs> */}
-                            <defs>
-                                <rect x="10" y="10" width="100" height="100" fill="#fff" />
-                            </defs>
+                    <ResponsiveContainer width={isMobile ? 900 : '100%'} height={400} id="123">
+                        <LineChart
+                            width={674}
+                            height={400}
+                            data={graphData}
+                            margin={{ left: 20, top: 10, right: 20 }}
+                        >
                             <XAxis dataKey="дата" tick={renderCustomAxisTick} tickLine={false} axisLine={false} />
                             <Tooltip />
-                            <Area
+                            <Line
                                 type="monotone"
-                                dataKey="данные1"
-                                stroke="#3377bb"
+                                dataKey="данные2"
+                                stroke="rgb(113, 204, 81)"
                                 fillOpacity={1}
                                 fill="transparent"
                                 dot={{
-                                    stroke: '#3377bb',
+                                    stroke: 'rgb(113, 204, 81)',
                                     strokeWidth: 2,
                                     r: 3,
                                     fill: '#fff',
@@ -111,13 +131,16 @@ function App() {
                                     stroke: '#fff',
                                     strokeWidth: 2,
                                     r: 5,
-                                    fill: '#3377bb',
+                                    fill: 'rgb(113, 204, 81)',
                                 }}
-                            />
-                            <Area
+                                strokeWidth={4}
+                            >
+                                <LabelList dataKey="данные2" position="top" content={renderGreenAreaData} />
+                            </Line>
+                            <Line
                                 type="monotone"
-                                dataKey="данные2"
-                                stroke="tomato"
+                                dataKey="данные1"
+                                stroke="red"
                                 fillOpacity={1}
                                 fill="transparent"
                                 dot={{
@@ -132,8 +155,11 @@ function App() {
                                     r: 5,
                                     fill: 'orangered',
                                 }}
-                            />
-                        </AreaChart>
+                                strokeWidth={4}
+                            >
+                                <LabelList dataKey="данные1" position="top" content={renderRedAreaData} />
+                            </Line>
+                        </LineChart>
                     </ResponsiveContainer>
                 </div>
             </div>
